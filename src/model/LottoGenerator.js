@@ -3,7 +3,7 @@ import Lotto from "./Lotto.js";
 
 class LottoGenerator {
   static #instance;
-  #Lottos = [];
+  #lottos = [];
 
   constructor() {
     if (LottoGenerator.#instance) {
@@ -22,11 +22,11 @@ class LottoGenerator {
 
   #addLotto() {
     const numbers = this.#generateRandomNumbers();
-    this.#Lottos.push(new Lotto(numbers));
+    this.#lottos.push(new Lotto(numbers));
   }
 
   getLottos() {
-    return [...this.#Lottos.map((lotto) => lotto.getNumbers())];
+    return [...this.#lottos.map((lotto) => lotto.getNumbers())];
   }
 }
 
