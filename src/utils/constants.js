@@ -7,7 +7,7 @@ export const MESSAGES = {
 
   OUTPUT: {
     OUTPUT_PURCHASE: "개를 구매했습니다.",
-    OUTPUT_STATISTICS: "당첨 통계\n---\n",
+    OUTPUT_STATISTICS: "당첨 통계\n---",
   },
 
   ERROR: {
