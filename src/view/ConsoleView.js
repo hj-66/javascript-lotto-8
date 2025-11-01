@@ -3,17 +3,17 @@ import { MESSAGES, WINNING_NUMBERS_INFORMATION } from "../utils/constants.js";
 
 class ConsoleView {
   async readPulchasePrice() {
-    const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
+    const input = await Console.readLineAsync(MESSAGES.INPUT.INPUT_PRICE);
     return input;
   }
 
   async readWinningNumbers() {
-    const input = await Console.readLineAsync("당첨 번호를 입력해 주세요.");
-    return input;
+    const input = await Console.readLineAsync(MESSAGES.INPUT.INPUT_WINNING_NUMBERS);
+    return input.split(",");
   }
 
   async readBonusNumber() {
-    const input = await Console.readLineAsync("보너스 번호를 입력해 주세요.");
+    const input = await Console.readLineAsync(MESSAGES.INPUT.INPUT_BONUS_NUMBER);
     return input;
   }
 

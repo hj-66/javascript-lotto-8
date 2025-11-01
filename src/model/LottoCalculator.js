@@ -18,13 +18,18 @@ class LottoCalculator {
     return returnRate.toFixed(1);
   }
 
+  getWinningDetail() {
+    const detail = this.#winningDetail;
+    return detail;
+  }
+
   matchNumbers(numbers, winningNumbers, bonusNumber) {
     let count = 0;
     let bonusCount = 0;
 
     numbers.forEach((number, index) => {
-      if (number === winningNumbers[index]) count++;
-      if (number === bonusNumber) bonusCount++;
+      if (Number(number) === winningNumbers[index]) count++;
+      if (Number(number) === bonusNumber) bonusCount++;
     });
 
     return [count, bonusCount];
