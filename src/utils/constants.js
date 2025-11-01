@@ -13,6 +13,9 @@ export const MESSAGES = {
   ERROR: {
     ERROR_QUANTITY_LIMIT: "[ERROR] 로또 번호는 6개여야 합니다.",
     ERROR_NUMBER_LIMIT: "[ERROR] 로또 번호는 1부터 45 사이의 숫자여야 합니다.",
+    ERROR_NUMBER_DUPLICATION:
+      "[ERROR] 한 로또에 같은 번호가 중복될 수는 없습니다.",
+    ERROR_PRICE_NONVALIDATE: "[ERROR] 유효하지 않은 구입금액입니다.",
   },
 };
 

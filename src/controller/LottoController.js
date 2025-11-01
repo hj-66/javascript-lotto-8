@@ -26,7 +26,8 @@ class LottoController {
     this.#pulchasePrice = await this.#view.readPulchasePrice();
     this.#lottoCount = this.#calculator.getLottoCount(this.#pulchasePrice);
     this.#view.printPurchase(this.#lottoCount);
-    for (let i = 0; i < this.#lottoCount; i++)
+    this.#lottos = new LottoGenerator();
+    for (let i = 0; i < this.#lottoCount - 1; i++)
       this.#lottos = new LottoGenerator();
     this.#view.printLottos(this.#lottos.getLottos());
   }

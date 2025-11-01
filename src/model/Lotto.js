@@ -1,3 +1,5 @@
+import { MESSAGES } from "../utils/constants.js";
+
 class Lotto {
   #numbers;
 
@@ -8,8 +10,20 @@ class Lotto {
 
   #validate(numbers) {
     if (numbers.length !== 6) {
-      throw new Error("[ERROR] 로또 번호는 6개여야 합니다.");
+      throw new Error(MESSAGES.ERROR.ERROR_QUANTITY_LIMIT);
     }
+
+    const numbersSet = new Set(numbers);
+
+    if (numbers.length !== numbersSet.size) {
+      throw new Error(MESSAGES.ERROR.ERROR_NUMBER_DUPLICATION);
+    }
+
+    numbers.forEach((number) => {
+      if (number < 1 || number > 45) {
+        throw new Error(MESSAGES.ERROR.ERROR_NUMBER_LIMIT);
+      }
+    })
   }
 
   getNumbers() {

@@ -1,11 +1,19 @@
-import { WINNING_AMOUNT } from "../utils/constants.js";
+import { MESSAGES, WINNING_AMOUNT } from "../utils/constants.js";
 
 class LottoCalculator {
   #lottoPrice = 1000;
   #totalWinnings = 0;
   #winningDetail = [0, 0, 0, 0, 0];
 
+  #validate(price) {
+    const number = Number(price);
+    if (isNaN(number) || number % 1000 !== 0) {
+      throw new Error(MESSAGES.ERROR.ERROR_PRICE_NONVALIDATE);
+    }
+  }
+
   getLottoCount(price) {
+    this.#validate(price);
     const lottocount = price / this.#lottoPrice;
     return lottocount;
   }
