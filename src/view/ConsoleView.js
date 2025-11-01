@@ -8,12 +8,16 @@ class ConsoleView {
   }
 
   async readWinningNumbers() {
-    const input = await Console.readLineAsync(MESSAGES.INPUT.INPUT_WINNING_NUMBERS);
+    const input = await Console.readLineAsync(
+      MESSAGES.INPUT.INPUT_WINNING_NUMBERS
+    );
     return input.split(",");
   }
 
   async readBonusNumber() {
-    const input = await Console.readLineAsync(MESSAGES.INPUT.INPUT_BONUS_NUMBER);
+    const input = await Console.readLineAsync(
+      MESSAGES.INPUT.INPUT_BONUS_NUMBER
+    );
     return input;
   }
 
@@ -35,7 +39,7 @@ class ConsoleView {
   }
 
   printReturnRate(returnRate) {
-    Console.print(`총 수익률은 ${returnRate}입니다.`);
+    Console.print(`총 수익률은 ${returnRate}%입니다.`);
   }
 }
 

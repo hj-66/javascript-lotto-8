@@ -7,6 +7,9 @@ class LottoController {
   #view;
   #calculator;
   #lottoCount;
+  #pulchasePrice;
+  #winningNumbers;
+  #bonusNumber;
 
   constructor() {
     this.#view = new ConsoleView();
@@ -16,11 +19,12 @@ class LottoController {
   async start() {
     await this.pulchaseLotto();
     await this.drawWinningNumber();
+    this.winningStatistics();
   }
 
   async pulchaseLotto() {
-    const pulchasePrice = await this.#view.readPulchasePrice();
-    this.#lottoCount = this.#calculator.getLottoCount(pulchasePrice);
+    this.#pulchasePrice = await this.#view.readPulchasePrice();
+    this.#lottoCount = this.#calculator.getLottoCount(this.#pulchasePrice);
     this.#view.printPurchase(this.#lottoCount);
     for (let i = 0; i < this.#lottoCount; i++)
       this.#lottos = new LottoGenerator();
@@ -28,16 +32,23 @@ class LottoController {
   }
 
   async drawWinningNumber() {
-    const winningNumbers = await this.#view.readWinningNumbers();
-    const bonusNumber = await this.#view.readBonusNumber();
+    this.#winningNumbers = await this.#view.readWinningNumbers();
+    this.#bonusNumber = await this.#view.readBonusNumber();
     this.#lottos.getLottos().forEach((lotto) => {
       const [count, bonuscount] = this.#calculator.matchNumbers(
         lotto,
-        winningNumbers,
-        bonusNumber
+        this.#winningNumbers,
+        this.#bonusNumber
       );
       this.#calculator.setWinningDetail(count, bonuscount);
     });
+  }
+
+  winningStatistics() {
+    this.#view.printStatistics(this.#calculator.getWinningDetail());
+    this.#view.printReturnRate(
+      this.#calculator.getReturnRate(this.#pulchasePrice)
+    );
   }
 }
 
