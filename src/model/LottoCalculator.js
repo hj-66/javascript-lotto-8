@@ -1,4 +1,4 @@
-import { WINNING_AMOUNT } from "../utils/constants";
+import { WINNING_AMOUNT } from "../utils/constants.js";
 
 class LottoCalculator {
   #lottoPrice = 1000;

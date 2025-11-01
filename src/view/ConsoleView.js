@@ -2,8 +2,8 @@ import { Console } from "@woowacourse/mission-utils";
 import { MESSAGES, WINNING_NUMBERS_INFORMATION } from "../utils/constants.js";
 
 class ConsoleView {
-  async readLottoNumbers() {
-    const input = await Console.readLineAsync("구입금액을 입력해 주세요.");
+  async readPulchasePrice() {
+    const input = await Console.readLineAsync("구입금액을 입력해 주세요.\n");
     return input;
   }
 
@@ -18,7 +18,7 @@ class ConsoleView {
   }
 
   printPurchase(count) {
-    Console.print(count + MESSAGES.OUTPUT.OUTPUT_PURCHASE);
+    Console.print("\n" + count + MESSAGES.OUTPUT.OUTPUT_PURCHASE);
   }
 
   printLottos(lottos) {
