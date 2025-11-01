@@ -22,12 +22,13 @@ class ConsoleView {
   }
 
   printPurchase(count) {
-    Console.print("\n" + count + MESSAGES.OUTPUT.OUTPUT_PURCHASE);
+    Console.print("");
+    Console.print(count + MESSAGES.OUTPUT.OUTPUT_PURCHASE);
   }
 
   printLottos(lottos) {
     lottos.forEach((lotto) => {
-      Console.print(lotto);
+      Console.print(`[${lotto.join(", ")}]`);
     });
   }
 
