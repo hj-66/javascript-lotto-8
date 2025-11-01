@@ -12,9 +12,9 @@ class LottoCalculator {
     let bonusCount = 0;
 
     numbers.forEach((number, index) => {
-        if (number === winningNumbers[index]) count++;
-        if (number === bonusNumber) bonusCount++; 
-    })
+      if (number === winningNumbers[index]) count++;
+      if (number === bonusNumber) bonusCount++;
+    });
 
     return [count, bonusCount];
   }
