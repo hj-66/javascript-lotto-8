@@ -27,8 +27,9 @@ class LottoCalculator {
   matchNumbers(numbers, winningNumbers, bonusNumber) {
     let count = 0;
     let bonusCount = 0;
-    numbers.forEach((number, index) => {
-      if (number == winningNumbers[index]) count++;
+    console.log(numbers);
+    numbers.forEach((number) => {
+      if (winningNumbers.includes(String(number))) count++;
       if (number == bonusNumber) bonusCount++;
     });
 
