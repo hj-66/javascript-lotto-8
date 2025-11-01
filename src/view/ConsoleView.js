@@ -24,7 +24,18 @@ class ConsoleView {
   printLottos(lottos) {
     lottos.forEach((lotto) => {
       Console.print(lotto);
-    })
+    });
+  }
+
+  printStatistics(winningDetail) {
+    Console.print(MESSAGES.OUTPUT.OUTPUT_STATISTICS);
+    WINNING_NUMBERS_INFORMATION.forEach((information, index) => {
+      Console.print(information + winningDetail[index] + "개");
+    });
+  }
+
+  printReturnRate(returnRate) {
+    Console.print(`총 수익률은 ${returnRate}입니다.`);
   }
 }
 
