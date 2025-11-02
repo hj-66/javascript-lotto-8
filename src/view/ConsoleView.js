@@ -2,7 +2,7 @@ import { Console } from "@woowacourse/mission-utils";
 import { MESSAGES, WINNING_NUMBERS_INFORMATION } from "../utils/constants.js";
 
 class ConsoleView {
-  async readPulchasePrice() {
+  async readPurchasePrice() {
     const input = await Console.readLineAsync(MESSAGES.INPUT.INPUT_PRICE);
     return input;
   }

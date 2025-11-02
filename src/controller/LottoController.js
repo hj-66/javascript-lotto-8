@@ -7,7 +7,7 @@ class LottoController {
   #view;
   #calculator;
   #lottoCount;
-  #pulchasePrice;
+  #purchasePrice;
   #winningNumbers;
   #bonusNumber;
 
@@ -23,8 +23,8 @@ class LottoController {
   }
 
   async pulchaseLotto() {
-    this.#pulchasePrice = await this.#view.readPulchasePrice();
-    this.#lottoCount = this.#calculator.getLottoCount(this.#pulchasePrice);
+    this.#purchasePrice = await this.#view.readPurchasePrice();
+    this.#lottoCount = this.#calculator.getLottoCount(this.#purchasePrice);
     this.#view.printPurchase(this.#lottoCount);
     this.#lottos = new LottoGenerator();
     for (let i = 0; i < this.#lottoCount - 1; i++)
@@ -48,7 +48,7 @@ class LottoController {
   winningStatistics() {
     this.#view.printStatistics(this.#calculator.getWinningDetail());
     this.#view.printReturnRate(
-      this.#calculator.getReturnRate(this.#pulchasePrice)
+      this.#calculator.getReturnRate(this.#purchasePrice)
     );
   }
 }
