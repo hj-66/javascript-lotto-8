@@ -3,53 +3,57 @@ import LottoGenerator from "../model/LottoGenerator.js";
 import ConsoleView from "../view/ConsoleView.js";
 
 class LottoController {
-  #lottos;
   #view;
   #calculator;
-  #lottoCount;
+  #generator;
   #purchasePrice;
+  #lottoCount;
   #winningNumbers;
   #bonusNumber;
 
   constructor() {
     this.#view = new ConsoleView();
     this.#calculator = new LottoCalculator();
+    this.#generator = new LottoGenerator();
   }
 
   async start() {
-    await this.pulchaseLotto();
-    await this.drawWinningNumber();
-    this.winningStatistics();
+    await this.purchaseLottos();
+    await this.drawWinningNumbers();
+    this.showStatistics();
   }
 
-  async pulchaseLotto() {
+  async purchaseLottos() {
     this.#purchasePrice = await this.#view.readPurchasePrice();
     this.#lottoCount = this.#calculator.getLottoCount(this.#purchasePrice);
+
     this.#view.printPurchase(this.#lottoCount);
-    this.#lottos = new LottoGenerator();
-    for (let i = 0; i < this.#lottoCount - 1; i++)
-      this.#lottos = new LottoGenerator();
-    this.#view.printLottos(this.#lottos.getLottos());
+
+    this.#generator.generateMultiple(this.#lottoCount);
+
+    this.#view.printLottos(this.#generator.getLottos());
   }
 
-  async drawWinningNumber() {
+  async drawWinningNumbers() {
     this.#winningNumbers = await this.#view.readWinningNumbers();
     this.#bonusNumber = await this.#view.readBonusNumber();
-    this.#lottos.getLottos().forEach((lotto) => {
-      const [count, bonuscount] = this.#calculator.matchNumbers(
+
+    this.#generator.getLottos().forEach((lotto) => {
+      const [matchCount, bonusMatch] = this.#calculator.matchNumbers(
         lotto,
         this.#winningNumbers,
         this.#bonusNumber
       );
-      this.#calculator.setWinningDetail(count, bonuscount);
+      this.#calculator.setWinningDetail(matchCount, bonusMatch);
     });
   }
 
-  winningStatistics() {
-    this.#view.printStatistics(this.#calculator.getWinningDetail());
-    this.#view.printReturnRate(
-      this.#calculator.getReturnRate(this.#purchasePrice)
-    );
+  showStatistics() {
+    const winningDetail = this.#calculator.getWinningDetail();
+    const returnRate = this.#calculator.getReturnRate(this.#purchasePrice);
+
+    this.#view.printStatistics(winningDetail);
+    this.#view.printReturnRate(returnRate);
   }
 }
 

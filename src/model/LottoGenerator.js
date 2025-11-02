@@ -2,16 +2,10 @@ import { MissionUtils } from "@woowacourse/mission-utils";
 import Lotto from "./Lotto.js";
 
 class LottoGenerator {
-  static #instance;
   #lottos = [];
 
   constructor() {
-    if (LottoGenerator.#instance) {
-      LottoGenerator.#instance.#addLotto();
-      return LottoGenerator.#instance;
-    }
-    this.#addLotto();
-    LottoGenerator.#instance = this;
+    this.#lottos = [];
   }
 
   #generateRandomNumbers() {
@@ -20,13 +14,20 @@ class LottoGenerator {
     );
   }
 
-  #addLotto() {
+  generate() {
     const numbers = this.#generateRandomNumbers();
-    this.#lottos.push(new Lotto(numbers));
+    const lotto = new Lotto(numbers);
+    this.#lottos.push(lotto);
+  }
+
+  generateMultiple(count) {
+    for (let i = 0; i < count; i++) {
+      this.generate();
+    }
   }
 
   getLottos() {
-    return [...this.#lottos.map((lotto) => lotto.getNumbers())];
+    return this.#lottos.map((lotto) => lotto.getNumbers());
   }
 }
 
