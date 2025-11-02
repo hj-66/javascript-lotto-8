@@ -21,6 +21,12 @@ export const validateRange = (numbers) => {
   });
 };
 
+export const validateBonusRange = (number) => {
+  if (number < 1 || number > 45) {
+    throw new Error(MESSAGES.ERROR.ERROR_NUMBER_LIMIT);
+  }
+};
+
 export const validatePrice = (price, lotto_price) => {
   const number = Number(price);
   if (Number.isNaN(number) || number <= 0 || number % lotto_price !== 0) {

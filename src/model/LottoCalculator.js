@@ -1,5 +1,6 @@
 import { WINNING_AMOUNT } from "../utils/constants.js";
 import {
+  validateBonusRange,
   validateDuplication,
   validateLength,
   validatePrice,
@@ -9,6 +10,13 @@ import {
 class LottoCalculator {
   #lotto_price = 1000;
   #winning_detail = [0, 0, 0, 0, 0];
+
+  #validateNumber(winningNumbers, bonusNumber) {
+    validateLength(winningNumbers);
+    validateDuplication(winningNumbers);
+    validateRange(winningNumbers);
+    validateBonusRange(bonusNumber);
+  }
 
   getLottoCount(price) {
     validatePrice(price, this.#lotto_price);
@@ -32,9 +40,7 @@ class LottoCalculator {
   }
 
   matchNumbers(lottoNumbers, winningNumbers, bonusNumber) {
-    validateLength(winningNumbers);
-    validateDuplication(winningNumbers);
-    validateRange(winningNumbers);
+    this.#validateNumber(winningNumbers, bonusNumber);
     const winningSet = new Set(winningNumbers.map((n) => Number(n)));
     const bonus = Number(bonusNumber);
 
@@ -59,7 +65,7 @@ class LottoCalculator {
       this.#winning_detail[3] += 1;
       return;
     }
-    
+
     this.#winning_detail[matchCount - 3] += 1;
   }
 }
