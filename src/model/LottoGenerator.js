@@ -15,8 +15,7 @@ class LottoGenerator {
   }
 
   generate() {
-    const numbers = this.#generateRandomNumbers();
-    const lotto = new Lotto(numbers);
+    const lotto = new Lotto(this.#generateRandomNumbers());
     this.#lottos.push(lotto);
   }
 
