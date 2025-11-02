@@ -1,22 +1,12 @@
-import { MESSAGES, WINNING_AMOUNT } from "../utils/constants.js";
+import { WINNING_AMOUNT } from "../utils/constants.js";
+import { validatePrice } from "../utils/validates.js";
 
 class LottoCalculator {
   #lotto_price = 1000;
   #winning_detail = [0, 0, 0, 0, 0];
 
-  #validatePrice(price) {
-    const number = Number(price);
-    if (
-      Number.isNaN(number) ||
-      number <= 0 ||
-      number % this.#lotto_price !== 0
-    ) {
-      throw new Error(MESSAGES.ERROR.ERROR_PRICE_NONVALIDATE);
-    }
-  }
-
   getLottoCount(price) {
-    this.#validatePrice(price);
+    validatePrice(price, this.#lotto_price);
     return Number(price) / this.#lotto_price;
   }
 

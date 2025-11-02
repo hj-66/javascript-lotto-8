@@ -1,4 +1,8 @@
-import { MESSAGES } from "../utils/constants.js";
+import {
+  validateDuplication,
+  validateLength,
+  validateRange,
+} from "../utils/validates.js";
 
 class Lotto {
   #numbers;
@@ -9,30 +13,9 @@ class Lotto {
   }
 
   #validate(numbers) {
-    this.#validateLength(numbers);
-    this.#validateDuplication(numbers);
-    this.#validateRange(numbers);
-  }
-
-  #validateLength(numbers) {
-    if (numbers.length !== 6) {
-      throw new Error(MESSAGES.ERROR.ERROR_QUANTITY_LIMIT);
-    }
-  }
-
-  #validateDuplication(numbers) {
-    const unique = new Set(numbers);
-    if (unique.size !== numbers.length) {
-      throw new Error(MESSAGES.ERROR.ERROR_NUMBER_DUPLICATION);
-    }
-  }
-
-  #validateRange(numbers) {
-    numbers.forEach((number) => {
-      if (number < 1 || number > 45) {
-        throw new Error(MESSAGES.ERROR.ERROR_NUMBER_LIMIT);
-      }
-    });
+    validateLength(numbers);
+    validateDuplication(numbers);
+    validateRange(numbers);
   }
 
   getNumbers() {
