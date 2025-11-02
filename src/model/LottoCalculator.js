@@ -59,9 +59,8 @@ class LottoCalculator {
       this.#winning_detail[3] += 1;
       return;
     }
-
-    const index = matchCount - 3;
-    this.#winning_detail[index] += 1;
+    
+    this.#winning_detail[matchCount - 3] += 1;
   }
 }
 
