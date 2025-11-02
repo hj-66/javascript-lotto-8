@@ -39,12 +39,12 @@ class LottoController {
     this.#bonusNumber = await this.#view.readBonusNumber();
 
     this.#generator.getLottos().forEach((lotto) => {
-      const [matchCount, bonusMatch] = this.#calculator.matchNumbers(
+      const { matchCount, bonusMatch } = this.#calculator.matchNumbers(
         lotto,
         this.#winningNumbers,
         this.#bonusNumber
       );
-      this.#calculator.setWinningDetail(matchCount, bonusMatch);
+      this.#calculator.recordResult(matchCount, bonusMatch);
     });
   }
 

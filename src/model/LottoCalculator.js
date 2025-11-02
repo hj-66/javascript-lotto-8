@@ -1,54 +1,69 @@
 import { MESSAGES, WINNING_AMOUNT } from "../utils/constants.js";
 
 class LottoCalculator {
-  #lottoPrice = 1000;
-  #totalWinnings = 0;
-  #winningDetail = [0, 0, 0, 0, 0];
+  #lotto_price = 1000;
+  #winning_detail = [0, 0, 0, 0, 0];
 
-  #validate(price) {
+  #validatePrice(price) {
     const number = Number(price);
-    if (isNaN(number) || number % 1000 !== 0) {
+    if (
+      Number.isNaN(number) ||
+      number <= 0 ||
+      number % this.#lotto_price !== 0
+    ) {
       throw new Error(MESSAGES.ERROR.ERROR_PRICE_NONVALIDATE);
     }
   }
 
   getLottoCount(price) {
-    this.#validate(price);
-    const lottocount = price / this.#lottoPrice;
-    return lottocount;
+    this.#validatePrice(price);
+    return Number(price) / this.#lotto_price;
   }
 
   getReturnRate(price) {
-    this.#winningDetail.forEach((winning, index) => {
-      this.#totalWinnings =
-        this.#totalWinnings + winning * WINNING_AMOUNT[index];
-    });
-    const returnRate = (this.#totalWinnings / price) * 100;
+    const totalWinnings = this.#winning_detail.reduce(
+      (acc, count, idx) => acc + count * WINNING_AMOUNT[idx],
+      0
+    );
+
+    if (!price || Number(price) === 0) return "0.0";
+
+    const returnRate = (totalWinnings / Number(price)) * 100;
     return returnRate.toFixed(1);
   }
 
   getWinningDetail() {
-    const detail = this.#winningDetail;
-    return detail;
+    return [...this.#winning_detail];
   }
 
-  matchNumbers(numbers, winningNumbers, bonusNumber) {
-    let count = 0;
-    let bonusCount = 0;
-    console.log(numbers);
-    numbers.forEach((number) => {
-      if (winningNumbers.includes(String(number))) count++;
-      if (number == bonusNumber) bonusCount++;
-    });
+  matchNumbers(lottoNumbers, winningNumbers, bonusNumber) {
+    const winningSet = new Set(winningNumbers.map((n) => Number(n)));
+    const bonus = Number(bonusNumber);
 
-    return [count, bonusCount];
+    let matchCount = 0;
+    for (const n of lottoNumbers) {
+      if (winningSet.has(Number(n))) matchCount += 1;
+    }
+    const hasBonus = lottoNumbers.some((n) => Number(n) === bonus);
+
+    return { matchCount, hasBonus };
   }
 
-  setWinningDetail(count, bonusCount) {
-    if (count === 6) count++;
-    if (count === 5 && bonusCount === 1) count++;
+  recordResult(matchCount, hasBonus) {
+    if (matchCount < 3) return;
 
-    this.#winningDetail[count - 3]++;
+    if (matchCount === 6) {
+      this.#winning_detail[4] += 1;
+      return;
+    }
+
+    if (matchCount === 5 && hasBonus) {
+      this.#winning_detail[3] += 1;
+      return;
+    }
+
+    const index = matchCount - 3;
+    this.#winning_detail[index] += 1;
   }
 }
 
