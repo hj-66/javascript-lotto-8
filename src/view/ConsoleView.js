@@ -11,7 +11,8 @@ class ConsoleView {
     const input = await Console.readLineAsync(
       MESSAGES.INPUT.INPUT_WINNING_NUMBERS
     );
-    return input.split(",");
+    const input_split = input.split(",").map((num) => Number(num.trim()));
+    return input_split;
   }
 
   async readBonusNumber() {

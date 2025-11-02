@@ -1,5 +1,10 @@
 import { WINNING_AMOUNT } from "../utils/constants.js";
-import { validatePrice } from "../utils/validates.js";
+import {
+  validateDuplication,
+  validateLength,
+  validatePrice,
+  validateRange,
+} from "../utils/validates.js";
 
 class LottoCalculator {
   #lotto_price = 1000;
@@ -27,6 +32,9 @@ class LottoCalculator {
   }
 
   matchNumbers(lottoNumbers, winningNumbers, bonusNumber) {
+    validateLength(winningNumbers);
+    validateDuplication(winningNumbers);
+    validateRange(winningNumbers);
     const winningSet = new Set(winningNumbers.map((n) => Number(n)));
     const bonus = Number(bonusNumber);
 
