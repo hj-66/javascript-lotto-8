@@ -23,7 +23,7 @@ describe("로또 클래스 테스트", () => {
   });
 });
 
-describe("당첨번호 테스트", () => {
+describe("당첨번호/보너스번호 테스트", () => {
   const calculator = new LottoCalculator();
 
   test("당첨 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
@@ -52,6 +52,16 @@ describe("당첨번호 테스트", () => {
         [1, 2, 3, 4, 5, 6],
         [1, 2, 3, 4, 5, 50],
         7
+      );
+    }).toThrow("[ERROR]");
+  });
+
+  test("보너스 번호에 1~45 이외의 숫자가 있으면 예외가 발생한다.", () => {
+    expect(() => {
+      calculator.matchNumbers(
+        [1, 2, 3, 4, 5, 6],
+        [1, 2, 3, 4, 5, 7],
+        50
       );
     }).toThrow("[ERROR]");
   });
