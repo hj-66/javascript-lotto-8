@@ -5,7 +5,7 @@ import {
   validateLength,
   validatePrice,
   validateRange,
-} from "../utils/validates.js";
+} from "../utils/validate.js";
 
 class LottoCalculator {
   #lotto_price = 1000;

@@ -2,7 +2,7 @@ import {
   validateDuplication,
   validateLength,
   validateRange,
-} from "../utils/validates.js";
+} from "../utils/validate.js";
 
 class Lotto {
   #numbers;
