@@ -1,6 +1,15 @@
 import Lotto from "../src/model/Lotto.js";
 import LottoCalculator from "../src/model/LottoCalculator.js";
 
+describe("구매금액 테스트", () => {
+  const calculator = new LottoCalculator();
+  test("구매금액이 1000으로 나누어 지지 않으면 예외가 발생한다.", () => {
+    expect(() => {
+      calculator.getLottoCount(8500);
+    }).toThrow("[ERROR]");
+  });
+});
+
 describe("로또 클래스 테스트", () => {
   test("로또 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
     expect(() => {
@@ -28,41 +37,25 @@ describe("당첨번호/보너스번호 테스트", () => {
 
   test("당첨 번호의 개수가 6개가 넘어가면 예외가 발생한다.", () => {
     expect(() => {
-      calculator.matchNumbers(
-        [1, 2, 3, 4, 5, 6],
-        [1, 2, 3, 4, 5, 6, 7],
-        7
-      );
+      calculator.matchNumbers([1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 6, 7], 7);
     }).toThrow("[ERROR]");
   });
 
   test("당첨 번호에 중복된 숫자가 있으면 예외가 발생한다.", () => {
     expect(() => {
-      calculator.matchNumbers(
-        [1, 2, 3, 4, 5, 6],
-        [1, 2, 3, 4, 5, 5],
-        7
-      );
+      calculator.matchNumbers([1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 5], 7);
     }).toThrow("[ERROR]");
   });
 
   test("당첨 번호에 1~45 이외의 숫자가 있으면 예외가 발생한다.", () => {
     expect(() => {
-      calculator.matchNumbers(
-        [1, 2, 3, 4, 5, 6],
-        [1, 2, 3, 4, 5, 50],
-        7
-      );
+      calculator.matchNumbers([1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 50], 7);
     }).toThrow("[ERROR]");
   });
 
   test("보너스 번호에 1~45 이외의 숫자가 있으면 예외가 발생한다.", () => {
     expect(() => {
-      calculator.matchNumbers(
-        [1, 2, 3, 4, 5, 6],
-        [1, 2, 3, 4, 5, 7],
-        50
-      );
+      calculator.matchNumbers([1, 2, 3, 4, 5, 6], [1, 2, 3, 4, 5, 7], 50);
     }).toThrow("[ERROR]");
   });
 });
